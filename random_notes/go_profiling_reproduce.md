@@ -37,15 +37,14 @@ User | System | Real | Mem | Testcase
 37.85 | 0.64 | 20.90 | 462484kB | ./havlak1
 24.04 | 0.43 | 15.09 | 308048kB | ./havlakpro1
 8.29 | 0.18 | 5.34 | 194860kB | ./havlak2
-8.47 | 0.20 | 4.98 | 202240kB | ./havlak3
+4.70 | 0.09 | 3.60 | 189552kB | ./havlak3
 
 
-The data structure opt. contributes 3x speedup, and the cache trick to reduce GC contributes another  little bit. 
+The data structure opt. contributes 3x speedup, and the cache trick to reduce GC contributes another 1.5-2x. 
 
 ## ! TODO
 A few issues need to be checked next week, decreased importance top to bottom
 * Observe user time is shorter than real cpu time. There must be some multithreading done by the compiler. However, passing `-p 1` to `go build` does not change results. How to turn off it?
-* Why the GC optimization does not contribute much. In the tutorial, GC opt contributes ~1.3x, but in my experiment the user time is even worse. What is wrong.
 * Reproduce the final tricks in the tutorial, according to their results, it will give another 3~4x speedup. 
 * Why the test results vary each run, around +/- 3% in terms of time. 
 

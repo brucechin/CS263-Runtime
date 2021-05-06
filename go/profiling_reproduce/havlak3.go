@@ -441,6 +441,18 @@ func appendUnique(a []int, x int) []int {
 	return append(a, x)
 }
 
+// -- for the GC opt
+var cache struct {
+	size         int
+	nonBackPreds [][]int
+	backPreds    [][]int
+	number       []int
+	header       []int
+	types        []int
+	last         []int
+	nodes        []*UnionFindNode
+}
+
 // FindLoops
 //
 // Find loops and build loop forest using Havlak's algorithm, which
@@ -454,18 +466,6 @@ func FindLoops(cfgraph *CFG, lsgraph *LSG) {
 	}
 
 	size := cfgraph.NumNodes()
-
-	// -- for the GC opt
-	var cache struct {
-		size         int
-		nonBackPreds [][]int
-		backPreds    [][]int
-		number       []int
-		header       []int
-		types        []int
-		last         []int
-		nodes        []*UnionFindNode
-	}
 
 	if cache.size < size {
 		cache.size = size
