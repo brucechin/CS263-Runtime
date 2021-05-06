@@ -42,11 +42,11 @@ User | System | Real | Mem | Testcase
 
 The data structure opt. contributes 3x speedup, and the cache trick to reduce GC contributes another 1.5-2x. 
 
-## ! TODO
-A few issues need to be checked next week, decreased importance top to bottom
+## TODO
+A few issues need to be checked, but not very big issues. 
 * Observe user time is shorter than real cpu time. There must be some multithreading done by the compiler. However, passing `-p 1` to `go build` does not change results. How to turn off it?
-* Reproduce the final tricks in the tutorial, according to their results, it will give another 3~4x speedup. 
-* Why the test results vary each run, around +/- 3% in terms of time. 
+* (Since this is irrelevant to profiling, not implemented) Reproduce the final tricks in the tutorial, according to their results, it will give another 3~4x speedup. 
+* Why the test results vary each run, around +/- 3% in terms of time. Frequency scaling?  
 
 ## Memo
 run `./all_prof.sh 1` will give detailed cpu profile results under log/, and can be interpreted using pprof.
