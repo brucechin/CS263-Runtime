@@ -1,7 +1,7 @@
 [package]
 name = "rocket"
 version = "0.1.0"
-authors = ["Rousan Ali <rousanali786@gmail.com>"]
+authors = ["Lianke Qin"]
 edition = "2018"
 
 [dependencies]
