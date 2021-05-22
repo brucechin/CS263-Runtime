@@ -38,7 +38,7 @@ fn matmul(n: usize) {
 
 fn base_matmul() {
     let retries = 5;
-    for n in [ 1000, 2000, 4000, 8000, 16000, 32000].iter() {
+    for n in [ 500, 1000, 2000, 4000, 8000].iter() {
         for j in 0..retries{
             // let time = std::time::Instant::now();
             // matmul_ndarray(*n as usize);
