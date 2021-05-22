@@ -9,7 +9,7 @@ fn main(){
     let mut g = Graph::new_undirected();
     let mut rng = rand::thread_rng();
 
-    for j in [10000, 100000, 1000000].iter() {
+    for j in [10000, 40000, 160000].iter() {
         let nodes: Vec<NodeIndex<_>> = (0..*j).into_iter().map(|i| g.add_node(i)).collect();
         let neighbor_bound = j / 100;
 
