@@ -3,10 +3,10 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"math/rand"
 	"sync"
-	"time"
+	// "time"
 )
 
 type Barrier struct {
@@ -66,20 +66,20 @@ func workOutRow(row int) {
 	}
 }
 
-func main() {
-	fmt.Println("Working...")
-	for row := 0; row < matrixSize; row++ {
-		go workOutRow(row)
-	}
+// func main() {
+// 	fmt.Println("Working...")
+// 	for row := 0; row < matrixSize; row++ {
+// 		go workOutRow(row)
+// 	}
 
-	start := time.Now()
-	for i := 0; i < 100; i++ {
-		generateRandomMatrix(&matrixA)
-		generateRandomMatrix(&matrixB)
-		workStart.Wait()
-		workComplete.Wait()
-	}
-	elapsed := time.Since(start)
-	fmt.Println("Done")
-	fmt.Println("Processing took %s\n", elapsed)
-}
+// 	start := time.Now()
+// 	for i := 0; i < 100; i++ {
+// 		generateRandomMatrix(&matrixA)
+// 		generateRandomMatrix(&matrixB)
+// 		workStart.Wait()
+// 		workComplete.Wait()
+// 	}
+// 	elapsed := time.Since(start)
+// 	fmt.Println("Done")
+// 	fmt.Println("Processing took %s\n", elapsed)
+// }

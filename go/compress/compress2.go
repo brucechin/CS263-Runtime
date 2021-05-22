@@ -1,6 +1,7 @@
 package main
 
 import (
+	// "bytes"
 	"compress/flate"
 	"io"
 	"os"
@@ -26,7 +27,7 @@ func compress(inputFile, outputFile string) {
 	io.Copy(f, i)
 }
 
-func main() {
-	compress("compress.go", "compress.min")
-	decompress("compress.min", "compress_1.go")
-}
+// func main() {
+// 	compress("compress.txt", "compress.min")
+// 	decompress("compress.min", "compress_1.txt")
+// }

@@ -8,6 +8,7 @@
 package main
 
 import (
+	"math/rand"
 	"sort"
 	"testing"
 )
@@ -60,7 +61,12 @@ func initRandomInt(size int, s []int) {
 }
 
 // a random initializer for float64
-func initRandomDouble(size int, s []float64) {}
+func initRandomDouble(size int, s []float64) {
+	r := rand.New(rand.NewSource(2021))
+	for i := 0; i < size; i++ {
+		s[i] = r.Float64() * 10
+	}
+}
 
 // possible other file-loaders or std-in scanners
 
