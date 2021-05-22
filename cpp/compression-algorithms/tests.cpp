@@ -13,17 +13,11 @@
 // c++ -std=c++11 -O3 -Wall -Wextra -Weffc++ -Wshadow -pedantic -I.. tests.cpp -o tests
 // ================================================================================================
 
-#define RLE_IMPLEMENTATION
-#include "rle.hpp"
 
-#define LZW_IMPLEMENTATION
-#include "lzw.hpp"
 
 #define HUFFMAN_IMPLEMENTATION
 #include "huffman.hpp"
 
-#define RICE_IMPLEMENTATION
-#include "rice.hpp"
 
 #include <cstdint>
 #include <cstring>
