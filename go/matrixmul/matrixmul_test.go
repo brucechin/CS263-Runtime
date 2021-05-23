@@ -26,9 +26,9 @@ func benchInt(b *testing.B, size int, f func(int, [][]int, [][]int, [][]int)) {
 	}
 }
 
-// func BenchmarkMatrixMulInt1000RowWise(b *testing.B) {
-// 	benchInt(b, 1000, matrixMulRowWise)
-// }
+func BenchmarkMatrixMulInt1000RowWise(b *testing.B) {
+	benchInt(b, 1000, matrixMulRowWise)
+}
 
 func BenchmarkMatrixMulInt1000Blocked(b *testing.B) {
 	benchInt(b, 1000, matrixMulBlocked)
@@ -44,46 +44,58 @@ func matrixMulRowWise(size int, matrixA [][]int, matrixB [][]int, result [][]int
 	Brow := size
 	Bcol := size
 
-	waitComplete := NewBarrier(Arow + 1)
-	for row := 0; row < Arow; row++ {
-		go func() {
-			for col := 0; col < Bcol; col++ {
+	var waitComplete sync.WaitGroup
+
+	for ii := 0; ii < Arow; ii++ {
+		waitComplete.Add(1)
+
+		go func(row int) {
+			defer waitComplete.Done()
+
+			for jj := 0; jj < Bcol; jj++ {
+				// fmt.Printf("i %d j %d\n", ii, jj)
 				var res = 0
-				for i := 0; i < Brow; i++ {
-					res += matrixA[row][i] * matrixB[i][col]
+				for kk := 0; kk < Brow; kk++ {
+					res += matrixA[row][kk] * matrixB[kk][jj]
 				}
-				result[row][col] = res
+				result[row][jj] = res
 			}
-			waitComplete.Wait()
-		}()
+		}(ii)
 	}
 	waitComplete.Wait()
 }
 
 // 2. blocked parallel algorithms using go routines
 func matrixMulBlocked(size int, matrixA [][]int, matrixB [][]int, result [][]int) {
-	tile := 32
+	tile := 16
 
 	Arow := size
 	Brow := size
 	Bcol := size
 
-	nWorkers := ((Arow + tile - 1) / tile) * ((Bcol + tile - 1) / tile)
-	waitComplete := NewBarrier(nWorkers + 1)
+	// nWorkers := ((Arow + tile - 1) / tile) * ((Bcol + tile - 1) / tile)
+
+	var waitComplete sync.WaitGroup
 
 	for rowStart := 0; rowStart < Arow; rowStart += tile {
 		for colStart := 0; colStart < Bcol; colStart += tile {
-			go func() {
-				var rowStop = rowStart + tile
+
+			waitComplete.Add(1)
+
+			go func(rowStartLocal int, colStartLocal int) {
+
+				defer waitComplete.Done()
+
+				var rowStop = rowStartLocal + tile
 				if rowStop > Arow {
 					rowStop = Arow
 				}
-				var colStop = colStart + tile
+				var colStop = colStartLocal + tile
 				if colStop > Bcol {
 					colStop = Bcol
 				}
-				for i := rowStart; i < rowStop; i++ {
-					for j := colStart; j < colStop; j++ {
+				for i := rowStartLocal; i < rowStop; i++ {
+					for j := colStartLocal; j < colStop; j++ {
 						var res = 0
 						for k := 0; k < Brow; k++ {
 							res += matrixA[i][k] * matrixB[k][j]
@@ -91,8 +103,7 @@ func matrixMulBlocked(size int, matrixA [][]int, matrixB [][]int, result [][]int
 						result[i][j] = res
 					}
 				}
-				waitComplete.Wait()
-			}()
+			}(rowStart, colStart)
 		}
 	}
 	waitComplete.Wait()
@@ -116,30 +127,4 @@ func zeroMatrix(size int, matrix [][]int) {
 			matrix[row][col] = 0
 		}
 	}
-}
-
-// structures to help sync workers
-type Barrier struct {
-	total int
-	count int
-	mutex *sync.Mutex
-	cond  *sync.Cond
-}
-
-func NewBarrier(size int) *Barrier {
-	lockToUse := &sync.Mutex{}
-	condToUse := sync.NewCond(lockToUse)
-	return &Barrier{size, size, lockToUse, condToUse}
-}
-
-func (b *Barrier) Wait() {
-	b.mutex.Lock()
-	b.count -= 1
-	if b.count == 0 {
-		b.count = b.total
-		b.cond.Broadcast()
-	} else {
-		b.cond.Wait()
-	}
-	b.mutex.Unlock()
 }
