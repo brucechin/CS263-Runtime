@@ -84,27 +84,31 @@ func benchCompress(b *testing.B, inputFile string, level int, writer func(io.Wri
 //       ans = "func Benchmark%s%sLevel%s(b *testing.B) { bench%s(b, \"%s\", %s, %s) }"%(algo, file, level, algo, inputs[file], level, algorithms[algo])
 // 	  print(ans)
 
+const (
+	inputFile = "alice29.txt"
+)
+
 func BenchmarkCompressInput1Level0(b *testing.B) {
-	benchCompress(b, "compress.txt", 0, flate.NewWriter)
+	benchCompress(b, inputFile, 0, flate.NewWriter)
 }
 func BenchmarkDecompressInput1Level0(b *testing.B) {
-	benchDecompress(b, "compress.txt", 0, flate.NewReader)
+	benchDecompress(b, inputFile, 0, flate.NewReader)
 }
 func BenchmarkCompressInput1Level1(b *testing.B) {
-	benchCompress(b, "compress.txt", 1, flate.NewWriter)
+	benchCompress(b, inputFile, 1, flate.NewWriter)
 }
 func BenchmarkDecompressInput1Level1(b *testing.B) {
-	benchDecompress(b, "compress.txt", 1, flate.NewReader)
+	benchDecompress(b, inputFile, 1, flate.NewReader)
 }
 func BenchmarkCompressInput1Level2(b *testing.B) {
-	benchCompress(b, "compress.txt", 2, flate.NewWriter)
+	benchCompress(b, inputFile, 2, flate.NewWriter)
 }
 func BenchmarkDecompressInput1Level2(b *testing.B) {
-	benchDecompress(b, "compress.txt", 2, flate.NewReader)
+	benchDecompress(b, inputFile, 2, flate.NewReader)
 }
 func BenchmarkCompressInput1Level3(b *testing.B) {
-	benchCompress(b, "compress.txt", 3, flate.NewWriter)
+	benchCompress(b, inputFile, 3, flate.NewWriter)
 }
 func BenchmarkDecompressInput1Level3(b *testing.B) {
-	benchDecompress(b, "compress.txt", 3, flate.NewReader)
+	benchDecompress(b, inputFile, 3, flate.NewReader)
 }

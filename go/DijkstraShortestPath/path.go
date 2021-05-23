@@ -62,3 +62,34 @@ func ShortestPaths(g Iterator, v int) (parent []int, dist []int64) {
 	}
 	return
 }
+
+func ShortestPaths2(g Iterator, parent []int, dist []int64, v int) {
+	// n := g.Order()
+	for i := range dist {
+		dist[i], parent[i] = -1, -1
+	}
+	dist[v] = 0
+
+	// Dijkstra's algorithm
+	Q := emptyPrioQueue(dist)
+	Q.Push(v)
+	for Q.Len() > 0 {
+		v := Q.Pop()
+		g.Visit(v, func(w int, d int64) (skip bool) {
+			if d < 0 {
+				return
+			}
+			alt := dist[v] + d
+			switch {
+			case dist[w] == -1:
+				dist[w], parent[w] = alt, v
+				Q.Push(w)
+			case alt < dist[w]:
+				dist[w], parent[w] = alt, v
+				Q.Fix(w)
+			}
+			return
+		})
+	}
+	return
+}
