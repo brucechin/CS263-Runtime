@@ -1,8 +1,8 @@
-package main
+package matrixmul
 
 import (
 	"math/rand"
-	// "sync"
+	"sync"
 	"testing"
 )
 
@@ -116,4 +116,30 @@ func zeroMatrix(size int, matrix [][]int) {
 			matrix[row][col] = 0
 		}
 	}
+}
+
+// structures to help sync workers
+type Barrier struct {
+	total int
+	count int
+	mutex *sync.Mutex
+	cond  *sync.Cond
+}
+
+func NewBarrier(size int) *Barrier {
+	lockToUse := &sync.Mutex{}
+	condToUse := sync.NewCond(lockToUse)
+	return &Barrier{size, size, lockToUse, condToUse}
+}
+
+func (b *Barrier) Wait() {
+	b.mutex.Lock()
+	b.count -= 1
+	if b.count == 0 {
+		b.count = b.total
+		b.cond.Broadcast()
+	} else {
+		b.cond.Wait()
+	}
+	b.mutex.Unlock()
 }

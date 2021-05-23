@@ -5,7 +5,7 @@
 // 		reference code golang/go/src/compress/flate/*
 //
 
-package main
+package compressing
 
 import (
 	"bytes"

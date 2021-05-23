@@ -5,7 +5,7 @@
 // 		code adapted from golang/go/src/sort/sort.go.
 //
 
-package main
+package sorting
 
 import (
 	"math/rand"
