@@ -1,0 +1,55 @@
+-------------------- data/rand_input.txt --------------------
+qs,10000,0
+>>> sort completed in 0.0112652 seconds.
+
+qs,10000,0
+>>> sort completed in 0.0019859 seconds.
+
+qs,10000,0
+>>> sort completed in 0.0024978 seconds.
+
+qs,40000,0
+>>> sort completed in 0.007872 seconds.
+
+qs,40000,0
+>>> sort completed in 0.0074537 seconds.
+
+qs,40000,0
+>>> sort completed in 0.0082868 seconds.
+
+qs,160000,15625
+>>> sort completed in 0.0343717 seconds.
+
+qs,160000,15625
+>>> sort completed in 0.0338973 seconds.
+
+qs,160000,15625
+>>> sort completed in 0.0324026 seconds.
+
+qs,640000,93750
+>>> sort completed in 0.142554 seconds.
+
+qs,640000,93750
+>>> sort completed in 0.135603 seconds.
+
+qs,640000,109375
+>>> sort completed in 0.146469 seconds.
+
+qs,2560000,437500
+>>> sort completed in 0.609816 seconds.
+
+qs,2560000,484375
+>>> sort completed in 0.667705 seconds.
+
+qs,2560000,421875
+>>> sort completed in 0.59784 seconds.
+
+qs,10240000,2015625
+>>> sort completed in 2.70536 seconds.
+
+qs,10240000,2125000
+>>> sort completed in 2.79098 seconds.
+
+qs,10240000,1890625
+>>> sort completed in 2.57377 seconds.
+

@@ -2,7 +2,7 @@
 type Matrix = Vec<Vec<f32>>;
 use nalgebra::{ArrayStorage, Dynamic, Matrix as NMatrix, VecStorage};
 use nalgebra::{U100, U20};
-// use ndarray::Array;
+use ndarray::Array;
 use tch::{Device, Kind, Tensor};
 
 fn get_matrices(n: usize) -> (Matrix, Matrix) {
@@ -17,11 +17,11 @@ fn matmul_torch(n: i64) {
 }
 
 
-// fn matmul_ndarray(n: usize) {
-//     let a = Array::<f32, _>::from_elem((n, n), 0.1);
-//     let b = Array::<f32, _>::from_elem((n, n), 0.1);
-//     let out = a.dot(&b);
-// }
+fn matmul_ndarray(n: usize) {
+    let a = Array::<f32, _>::from_elem((n, n), 0.1);
+    let b = Array::<f32, _>::from_elem((n, n), 0.1);
+    let out = a.dot(&b);
+}
 
 fn matmul(n: usize) {
     let (a, b) = get_matrices(n);
@@ -37,13 +37,13 @@ fn matmul(n: usize) {
 
 
 fn base_matmul() {
-    let retries = 5;
+    let retries = 2;
     for n in [ 500, 1000, 2000, 4000, 8000].iter() {
         for j in 0..retries{
-            // let time = std::time::Instant::now();
-            // matmul_ndarray(*n as usize);
-            // let took = time.elapsed();
-            // println!("{} -- length {} -- {} seconds", "NDarray", n, took.as_secs_f64());
+            let time = std::time::Instant::now();
+            matmul(*n as usize);
+            let took = time.elapsed();
+            println!("{} -- length {} -- {} seconds", "Naive", n, took.as_secs_f64());
     
             let time = std::time::Instant::now();
             matmul_torch(*n as i64);
