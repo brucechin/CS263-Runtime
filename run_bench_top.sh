@@ -24,3 +24,10 @@ cd ..
 #end of Cpp tests
 
 # Rs tests
+cd rust/
+./run_bench.sh compression 
+./run_bench.sh graph
+./run_bench.sh matrixmul  
+./run_bench.sh sorting 
+
+#http server should be tested manually with two consoles.
