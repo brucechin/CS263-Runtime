@@ -33,15 +33,16 @@ func BenchmarkMatrixMulInt500Serial(b *testing.B) {
 func BenchmarkMatrixMulInt1000Serial(b *testing.B) {
 	benchInt(b, 1000, matrixMulSerial)
 }
-func BenchmarkMatrixMulInt2000Serial(b *testing.B) {
-	benchInt(b, 2000, matrixMulSerial)
-}
-func BenchmarkMatrixMulInt4000Serial(b *testing.B) {
-	benchInt(b, 4000, matrixMulSerial)
-}
-func BenchmarkMatrixMulInt8000Serial(b *testing.B) {
-	benchInt(b, 8000, matrixMulSerial)
-}
+
+// func BenchmarkMatrixMulInt2000Serial(b *testing.B) {
+// 	benchInt(b, 2000, matrixMulSerial)
+// }
+// func BenchmarkMatrixMulInt4000Serial(b *testing.B) {
+// 	benchInt(b, 4000, matrixMulSerial)
+// }
+// func BenchmarkMatrixMulInt8000Serial(b *testing.B) {
+// 	benchInt(b, 8000, matrixMulSerial)
+// }
 func BenchmarkMatrixMulInt500RowWise(b *testing.B) {
 	benchInt(b, 500, matrixMulRowWise)
 }
