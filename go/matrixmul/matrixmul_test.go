@@ -27,6 +27,7 @@ func benchInt(b *testing.B, size int, f func(int, [][]int, [][]int, [][]int)) {
 }
 
 // test problem sizes 500, 1000, 2000, 4000, 8000
+
 func BenchmarkMatrixMulInt500Serial(b *testing.B) {
 	benchInt(b, 500, matrixMulSerial)
 }
@@ -34,30 +35,31 @@ func BenchmarkMatrixMulInt1000Serial(b *testing.B) {
 	benchInt(b, 1000, matrixMulSerial)
 }
 
-// func BenchmarkMatrixMulInt2000Serial(b *testing.B) {
-// 	benchInt(b, 2000, matrixMulSerial)
+func BenchmarkMatrixMulInt2000Serial(b *testing.B) {
+	benchInt(b, 2000, matrixMulSerial)
+}
+func BenchmarkMatrixMulInt4000Serial(b *testing.B) {
+	benchInt(b, 4000, matrixMulSerial)
+}
+func BenchmarkMatrixMulInt8000Serial(b *testing.B) {
+	benchInt(b, 8000, matrixMulSerial)
+}
+
+// func BenchmarkMatrixMulInt500RowWise(b *testing.B) {
+// 	benchInt(b, 500, matrixMulRowWise)
 // }
-// func BenchmarkMatrixMulInt4000Serial(b *testing.B) {
-// 	benchInt(b, 4000, matrixMulSerial)
+// func BenchmarkMatrixMulInt1000RowWise(b *testing.B) {
+// 	benchInt(b, 1000, matrixMulRowWise)
 // }
-// func BenchmarkMatrixMulInt8000Serial(b *testing.B) {
-// 	benchInt(b, 8000, matrixMulSerial)
+// func BenchmarkMatrixMulInt2000RowWise(b *testing.B) {
+// 	benchInt(b, 2000, matrixMulRowWise)
 // }
-func BenchmarkMatrixMulInt500RowWise(b *testing.B) {
-	benchInt(b, 500, matrixMulRowWise)
-}
-func BenchmarkMatrixMulInt1000RowWise(b *testing.B) {
-	benchInt(b, 1000, matrixMulRowWise)
-}
-func BenchmarkMatrixMulInt2000RowWise(b *testing.B) {
-	benchInt(b, 2000, matrixMulRowWise)
-}
-func BenchmarkMatrixMulInt4000RowWise(b *testing.B) {
-	benchInt(b, 4000, matrixMulRowWise)
-}
-func BenchmarkMatrixMulInt8000RowWise(b *testing.B) {
-	benchInt(b, 8000, matrixMulRowWise)
-}
+// func BenchmarkMatrixMulInt4000RowWise(b *testing.B) {
+// 	benchInt(b, 4000, matrixMulRowWise)
+// }
+// func BenchmarkMatrixMulInt8000RowWise(b *testing.B) {
+// 	benchInt(b, 8000, matrixMulRowWise)
+// }
 
 func BenchmarkMatrixMulInt500Blocked(b *testing.B) {
 	benchInt(b, 500, matrixMulBlocked)
@@ -125,7 +127,7 @@ func matrixMulRowWise(size int, matrixA [][]int, matrixB [][]int, result [][]int
 
 // 2. blocked parallel algorithms using go routines
 func matrixMulBlocked(size int, matrixA [][]int, matrixB [][]int, result [][]int) {
-	tile := 8
+	tile := 32
 
 	Arow := size
 	Brow := size
@@ -133,38 +135,40 @@ func matrixMulBlocked(size int, matrixA [][]int, matrixB [][]int, result [][]int
 
 	// nWorkers := ((Arow + tile - 1) / tile) * ((Bcol + tile - 1) / tile)
 
-	var waitComplete sync.WaitGroup
+	// var waitComplete sync.WaitGroup
 
 	for rowStart := 0; rowStart < Arow; rowStart += tile {
 		for colStart := 0; colStart < Bcol; colStart += tile {
 
-			waitComplete.Add(1)
+			// waitComplete.Add(1)
 
-			go func(rowStartLocal int, colStartLocal int) {
+			// go func(rowStartLocal int, colStartLocal int) {
 
-				defer waitComplete.Done()
+			// defer waitComplete.Done()
+			rowStartLocal := rowStart
+			colStartLocal := colStart
 
-				var rowStop = rowStartLocal + tile
-				if rowStop > Arow {
-					rowStop = Arow
-				}
-				var colStop = colStartLocal + tile
-				if colStop > Bcol {
-					colStop = Bcol
-				}
-				for i := rowStartLocal; i < rowStop; i++ {
-					for j := colStartLocal; j < colStop; j++ {
-						var res = 0
-						for k := 0; k < Brow; k++ {
-							res += matrixA[i][k] * matrixB[k][j]
-						}
-						result[i][j] = res
+			var rowStop = rowStartLocal + tile
+			if rowStop > Arow {
+				rowStop = Arow
+			}
+			var colStop = colStartLocal + tile
+			if colStop > Bcol {
+				colStop = Bcol
+			}
+			for i := rowStartLocal; i < rowStop; i++ {
+				for j := colStartLocal; j < colStop; j++ {
+					var res = 0
+					for k := 0; k < Brow; k++ {
+						res += matrixA[i][k] * matrixB[k][j]
 					}
+					result[i][j] = res
 				}
-			}(rowStart, colStart)
+			}
+			// }(rowStart, colStart)
 		}
 	}
-	waitComplete.Wait()
+	// waitComplete.Wait()
 }
 
 //

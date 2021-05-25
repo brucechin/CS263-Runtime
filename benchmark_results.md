@@ -24,6 +24,10 @@ Tests
 [x] http
 
 
+# Setup
+Intel(R) Xeon(R) CPU E5-2698 v4 @ 2.20GHz
+
+
 # Compress
 
 alice29.txt
@@ -128,6 +132,16 @@ heapsort -- length 10240000 -- 6.440489583 seconds
 
 # Dijkstra SSSP
 
+**New**
+Average 20 outgoing edges per node. Data structures are EXACTLY the same.
+
+| graph size | 1e4 | 4e4 | 16e4|
+|-|-|-|-|
+| **Go** time | 9.69ms | 37.89ms | 169.0ms |
+| **Cpp** time | 4.4ms | 25.1ms | 163ms |
+
+**Outdated**
+
 Average 1/100 edges
 
 
@@ -141,6 +155,14 @@ Average 1/100 edges
 
 
 # Matmul
+
+| matrix shape | 500 | 1000 | 2000 | 4000 | 8000
+|-|-|-|-|-|-|
+| **cpp** | 0.22s | 1.56s | 12.23s | 98.34s | |
+| **go** (serial) | 576ms | 4.33s | 40.2s | > 2min | |
+| **Rust** | 31.3s | 31.3s | 40.2s | > 2min | |
+
+
 
 | matrix shape | 500 | 1000 | 2000 | 4000 | 8000
 |-|-|-|-|-|-|

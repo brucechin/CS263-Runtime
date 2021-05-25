@@ -9,7 +9,8 @@ func benchSSSP(b *testing.B, size int) {
 	b.StopTimer()
 	g := New(size)
 	for i := 0; i < size; i++ {
-		for j := 0; j < size/100; j++ {
+		// for j := 0; j < size/100; j++ {
+		for j := 0; j < 20; j++ {
 			g.Add(i, rand.Intn(size))
 			// g.Add(0, rand.Intn(n))
 			// g.Add(rand.Intn(n), rand.Intn(n))

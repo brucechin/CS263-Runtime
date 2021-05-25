@@ -4,6 +4,8 @@
 #include <limits>
 #include <chrono>
 
+#include "heap.hpp"
+
 #define MAXV 160000
 
 typedef int64_t EdgeVal;
@@ -48,24 +50,33 @@ void dijkstra_shortest_path(
     // initialize
     for (int i = 0; i < nv; i++ ) {
         parent[i] = -1;
-        distance[i] = std::numeric_limits<int64_t>::max();
+        distance[i] = -1;
     }
     std::vector<bool> discovered(nv+1, false);
 
     distance[start] = 0;
 
-    typedef std::tuple<EdgeVal, int> Q;
-    std::priority_queue<Q> pq;
-    pq.push( Q(0, start) );
+    // typedef std::tuple<EdgeVal, int> Q;
+    // std::priority_queue<Q> pq;
+    // pq.push( Q(0, start) );
+
+    PriorQueue *pq = emptyPriorQueue(nv, distance);
+    pq->Push(start);
+
 
     int v; EdgeVal w;
 
     // algorithm
  
-    while (!pq.empty()) {
-        // take queue header
-        std::tie(w, v) = pq.top();
-        pq.pop();
+    // while (!pq.empty()) {
+    //     // take queue header
+    //     std::tie(w, v) = pq.top();
+    //     pq.pop();
+
+    // int op_count = 0;
+
+    while(pq->cap > 0) {
+        v = pq->Pop();
         
         if (discovered[v]) continue;
         discovered[v] = true;
@@ -73,23 +84,41 @@ void dijkstra_shortest_path(
         // traverse its edges
         Graph::EdgeSet &edgelist = g->edges[v];
         EdgeVal mydist = distance[v];
+
         for (auto it = edgelist.begin(); it != edgelist.end(); it++ ) {
+
+            // op_count++;
+
+
             int u = it->first;
             EdgeVal w = it->second;
 
             EdgeVal dist_new = mydist + w;
-            if (dist_new < distance[u])  // find a shorter path
-            {
-                distance[u] = dist_new;
-                parent[u] = v;    
-                
-                // we do not clear old records of u, because the priority queue will put it in the front, and the discovered will be marked. 
-                // When the edge distance are all 1, their will be no path update, only newly discovered paths, so this is no difference from an algorithm that removes old values in priority queue.
-
-                pq.push( Q(dist_new, u) );
+            if (distance[u] == -1) {
+                distance[u]=dist_new;
+                parent[u]=v;
+                pq->Push(u);
             }
+            else if (distance[u] > dist_new) {
+                distance[u]=dist_new;
+                parent[u]=v;
+                pq->Fix(u);
+            }
+            // if (dist_new < distance[u])  // find a shorter path
+            // {
+            //     distance[u] = dist_new;
+            //     parent[u] = v;    
+                
+            //     // we do not clear old records of u, because the priority queue will put it in the front, and the discovered will be marked. 
+            //     // When the edge distance are all 1, their will be no path update, only newly discovered paths, so this is no difference from an algorithm that removes old values in priority queue.
+
+            //     pq.push( Q(dist_new, u) );
+            // }
         }
     }
+    delete[] pq;
+
+    // printf("Op count: %d\n", op_count);
 }
 
 int main() {
@@ -105,7 +134,7 @@ int main() {
                 // set all edges to 1, the algorithm turns similar to BFS. 
                 // This ensures this c++ priority queue implementation is same complexity with go's priority queue 
                 // (c++ does not implement outdated element remove) 
-                g->insert_edge(k, rand() % i, 1, true); 
+                g->insert_edge(k, rand() % i, 0, true); 
 
             }
         }
