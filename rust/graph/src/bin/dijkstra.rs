@@ -11,7 +11,7 @@ fn main(){
 
     for j in [10000, 40000, 160000].iter() {
         let nodes: Vec<NodeIndex<_>> = (0..*j).into_iter().map(|i| g.add_node(i)).collect();
-        let neighbor_bound = j / 100;
+        let neighbor_bound = 20;
 
         for i in 0..*j {
             let n1 = nodes[i];
