@@ -3,7 +3,6 @@
 #include "QuickSort.h"
 #include "MergeSort.h"
 #include "InsertionSort.h"
-#include <chrono>
 
 bool getVerboseOption(int argc, char *argv[]);
 
@@ -21,7 +20,6 @@ int main(int argc, char *argv[]) {
         char *inputFile = argv[2];
         char *outputFile = argv[3];
         std::string algorithm = toLower(argv[4]);
-        auto startTime = std::chrono::system_clock::now();     
 
         if (algorithm == QUICK_SORT) {
                 QuickSort qs(arraySize, inputFile, outputFile, isVerbose);
@@ -35,10 +33,7 @@ int main(int argc, char *argv[]) {
         }
         
 
-        auto endTime = std::chrono::system_clock::now();                                             
-        std::chrono::duration<double> elapsedSeconds = endTime - startTime;                                
-        std::cout << ">>> sort completed in " << elapsedSeconds.count() << " seconds.\n"; 
-        std::cout << std::endl;    
+ 
 
 
         return 0;

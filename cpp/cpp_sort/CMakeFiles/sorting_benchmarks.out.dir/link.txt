@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11   CMakeFiles/sorting_benchmarks.out.dir/src/main.cpp.o CMakeFiles/sorting_benchmarks.out.dir/src/QuickSort.cpp.o CMakeFiles/sorting_benchmarks.out.dir/src/SortingBase.cpp.o CMakeFiles/sorting_benchmarks.out.dir/src/MergeSort.cpp.o CMakeFiles/sorting_benchmarks.out.dir/src/InsertionSort.cpp.o  -o sorting_benchmarks.out 

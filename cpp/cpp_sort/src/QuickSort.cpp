@@ -1,5 +1,6 @@
 #include "QuickSort.h"
-
+#include <chrono>
+#include <algorithm>
 /**
  * Default constructor.
  * @return
@@ -16,10 +17,14 @@ void QuickSort::sort() {
     // Get the sort from the file.
     initializeNumbersArray();
     startTimer();
-
+    auto startTime = std::chrono::system_clock::now();     
     // Sort the sort.
-    sortNumbers(numbers, 0, arraySize - 1);
-
+    //sortNumbers(numbers, 0, arraySize - 1);
+    std::sort(numbers, numbers + arraySize);
+    auto endTime = std::chrono::system_clock::now();                                             
+    std::chrono::duration<double> elapsedSeconds = endTime - startTime;                                
+    std::cout << ">>> quicksort completed in " << elapsedSeconds.count() << " seconds.\n"; 
+    std::cout << std::endl;   
     // End the chronometer.
     endTimer();
 

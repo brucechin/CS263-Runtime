@@ -1,0 +1,55 @@
+-------------------- data/rand.txt --------------------
+>>> quicksort completed in 0.0010344 seconds.
+
+qs,10000,0
+>>> quicksort completed in 0.0011178 seconds.
+
+qs,10000,15625
+>>> quicksort completed in 0.0010132 seconds.
+
+qs,10000,0
+>>> quicksort completed in 0.0048578 seconds.
+
+qs,40000,15625
+>>> quicksort completed in 0.0044692 seconds.
+
+qs,40000,0
+>>> quicksort completed in 0.004608 seconds.
+
+qs,40000,0
+>>> quicksort completed in 0.0226769 seconds.
+
+qs,160000,15625
+>>> quicksort completed in 0.0222692 seconds.
+
+qs,160000,15625
+>>> quicksort completed in 0.0231349 seconds.
+
+qs,160000,31250
+>>> quicksort completed in 0.0922925 seconds.
+
+qs,640000,93750
+>>> quicksort completed in 0.0941678 seconds.
+
+qs,640000,93750
+>>> quicksort completed in 0.0892519 seconds.
+
+qs,640000,93750
+>>> quicksort completed in 0.368975 seconds.
+
+qs,2560000,359375
+>>> quicksort completed in 0.3373 seconds.
+
+qs,2560000,343750
+>>> quicksort completed in 0.326701 seconds.
+
+qs,2560000,328125
+>>> quicksort completed in 1.36328 seconds.
+
+qs,10240000,1375000
+>>> quicksort completed in 1.37574 seconds.
+
+qs,10240000,1375000
+>>> quicksort completed in 1.4316 seconds.
+
+qs,10240000,1406250

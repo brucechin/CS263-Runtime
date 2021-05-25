@@ -1,4 +1,4 @@
-# Install script for directory: /home/liankeqin/CS263-Runtime/cpp/cpp_sort
+# Install script for directory: /home/liankeqin/tmp_dirs/CS263-Runtime/cpp/cpp_sort
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/liankeqin/CS263-Runtime/cpp/cpp_sort/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/liankeqin/tmp_dirs/CS263-Runtime/cpp/cpp_sort/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
