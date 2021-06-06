@@ -1,8 +1,9 @@
 #!/bin/bash
 
 for testcase in $@
+do
 cd $testcase
-./run_bench.sh
+source run_bench.sh
 cd ..
 done
 

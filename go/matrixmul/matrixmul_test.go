@@ -61,21 +61,21 @@ func BenchmarkMatrixMulInt8000Serial(b *testing.B) {
 // 	benchInt(b, 8000, matrixMulRowWise)
 // }
 
-func BenchmarkMatrixMulInt500Blocked(b *testing.B) {
-	benchInt(b, 500, matrixMulBlocked)
-}
-func BenchmarkMatrixMulInt1000Blocked(b *testing.B) {
-	benchInt(b, 1000, matrixMulBlocked)
-}
-func BenchmarkMatrixMulInt2000Blocked(b *testing.B) {
-	benchInt(b, 2000, matrixMulBlocked)
-}
-func BenchmarkMatrixMulInt4000Blocked(b *testing.B) {
-	benchInt(b, 4000, matrixMulBlocked)
-}
-func BenchmarkMatrixMulInt8000Blocked(b *testing.B) {
-	benchInt(b, 8000, matrixMulBlocked)
-}
+// func BenchmarkMatrixMulInt500Blocked(b *testing.B) {
+// 	benchInt(b, 500, matrixMulBlocked)
+// }
+// func BenchmarkMatrixMulInt1000Blocked(b *testing.B) {
+// 	benchInt(b, 1000, matrixMulBlocked)
+// }
+// func BenchmarkMatrixMulInt2000Blocked(b *testing.B) {
+// 	benchInt(b, 2000, matrixMulBlocked)
+// }
+// func BenchmarkMatrixMulInt4000Blocked(b *testing.B) {
+// 	benchInt(b, 4000, matrixMulBlocked)
+// }
+// func BenchmarkMatrixMulInt8000Blocked(b *testing.B) {
+// 	benchInt(b, 8000, matrixMulBlocked)
+// }
 
 //
 // algorithms

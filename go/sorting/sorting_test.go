@@ -96,41 +96,42 @@ func BenchmarkSortInt160000Sort(b *testing.B)   { benchInt(b, 160000, SortInt, i
 func BenchmarkSortInt640000Sort(b *testing.B)   { benchInt(b, 640000, SortInt, initRandomInt) }
 func BenchmarkSortInt2560000Sort(b *testing.B)  { benchInt(b, 2560000, SortInt, initRandomInt) }
 func BenchmarkSortInt10240000Sort(b *testing.B) { benchInt(b, 10240000, SortInt, initRandomInt) }
-func BenchmarkSortDouble10000Sort(b *testing.B) { benchDouble(b, 10000, SortDouble, initRandomDouble) }
-func BenchmarkSortDouble40000Sort(b *testing.B) { benchDouble(b, 40000, SortDouble, initRandomDouble) }
-func BenchmarkSortDouble160000Sort(b *testing.B) {
-	benchDouble(b, 160000, SortDouble, initRandomDouble)
-}
-func BenchmarkSortDouble640000Sort(b *testing.B) {
-	benchDouble(b, 640000, SortDouble, initRandomDouble)
-}
-func BenchmarkSortDouble2560000Sort(b *testing.B) {
-	benchDouble(b, 2560000, SortDouble, initRandomDouble)
-}
-func BenchmarkSortDouble10240000Sort(b *testing.B) {
-	benchDouble(b, 10240000, SortDouble, initRandomDouble)
-}
-func BenchmarkSortInt10000Stable(b *testing.B)    { benchInt(b, 10000, StableInt, initRandomInt) }
-func BenchmarkSortInt40000Stable(b *testing.B)    { benchInt(b, 40000, StableInt, initRandomInt) }
-func BenchmarkSortInt160000Stable(b *testing.B)   { benchInt(b, 160000, StableInt, initRandomInt) }
-func BenchmarkSortInt640000Stable(b *testing.B)   { benchInt(b, 640000, StableInt, initRandomInt) }
-func BenchmarkSortInt2560000Stable(b *testing.B)  { benchInt(b, 2560000, StableInt, initRandomInt) }
-func BenchmarkSortInt10240000Stable(b *testing.B) { benchInt(b, 10240000, StableInt, initRandomInt) }
-func BenchmarkSortDouble10000Stable(b *testing.B) {
-	benchDouble(b, 10000, StableDouble, initRandomDouble)
-}
-func BenchmarkSortDouble40000Stable(b *testing.B) {
-	benchDouble(b, 40000, StableDouble, initRandomDouble)
-}
-func BenchmarkSortDouble160000Stable(b *testing.B) {
-	benchDouble(b, 160000, StableDouble, initRandomDouble)
-}
-func BenchmarkSortDouble640000Stable(b *testing.B) {
-	benchDouble(b, 640000, StableDouble, initRandomDouble)
-}
-func BenchmarkSortDouble2560000Stable(b *testing.B) {
-	benchDouble(b, 2560000, StableDouble, initRandomDouble)
-}
-func BenchmarkSortDouble10240000Stable(b *testing.B) {
-	benchDouble(b, 10240000, StableDouble, initRandomDouble)
-}
+
+// func BenchmarkSortDouble10000Sort(b *testing.B) { benchDouble(b, 10000, SortDouble, initRandomDouble) }
+// func BenchmarkSortDouble40000Sort(b *testing.B) { benchDouble(b, 40000, SortDouble, initRandomDouble) }
+// func BenchmarkSortDouble160000Sort(b *testing.B) {
+// 	benchDouble(b, 160000, SortDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble640000Sort(b *testing.B) {
+// 	benchDouble(b, 640000, SortDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble2560000Sort(b *testing.B) {
+// 	benchDouble(b, 2560000, SortDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble10240000Sort(b *testing.B) {
+// 	benchDouble(b, 10240000, SortDouble, initRandomDouble)
+// }
+// func BenchmarkSortInt10000Stable(b *testing.B)    { benchInt(b, 10000, StableInt, initRandomInt) }
+// func BenchmarkSortInt40000Stable(b *testing.B)    { benchInt(b, 40000, StableInt, initRandomInt) }
+// func BenchmarkSortInt160000Stable(b *testing.B)   { benchInt(b, 160000, StableInt, initRandomInt) }
+// func BenchmarkSortInt640000Stable(b *testing.B)   { benchInt(b, 640000, StableInt, initRandomInt) }
+// func BenchmarkSortInt2560000Stable(b *testing.B)  { benchInt(b, 2560000, StableInt, initRandomInt) }
+// func BenchmarkSortInt10240000Stable(b *testing.B) { benchInt(b, 10240000, StableInt, initRandomInt) }
+// func BenchmarkSortDouble10000Stable(b *testing.B) {
+// 	benchDouble(b, 10000, StableDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble40000Stable(b *testing.B) {
+// 	benchDouble(b, 40000, StableDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble160000Stable(b *testing.B) {
+// 	benchDouble(b, 160000, StableDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble640000Stable(b *testing.B) {
+// 	benchDouble(b, 640000, StableDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble2560000Stable(b *testing.B) {
+// 	benchDouble(b, 2560000, StableDouble, initRandomDouble)
+// }
+// func BenchmarkSortDouble10240000Stable(b *testing.B) {
+// 	benchDouble(b, 10240000, StableDouble, initRandomDouble)
+// }

@@ -1,32 +1,34 @@
-# CS263-Runtime
-
+CS263-Runtime
+===
 ## Team member 
 
 Guyue Huang and Lianke Qin
-
 
 ## Targets
 
 Compare the performance difference among static language including C++, Go and Rust by profiling 5-10 programs under different compiler optimization levels and input sizes.
 
-1. key-value store. evaluate insert/update/delete/search hybrid workload throughput and latency
-2. compression and decompression algorithm like zip or tar, or serialization and de-serialization algorithm
-3. matrix multiplication?
-4. crypto primitives like RSA encryption and decryption
-5. sorting algorithm?
-6. find all the prime numbers which are smaller than N
-7. simple HTTP request handle throughput
+1. Graph algorith: Dijkstra single-source shortest path.
+2. matrix multiplication
+3. sorting algorithm
+4. simple HTTP request handle throughput
+5. Bitmap set operations.
 
-## Some more sample programs
-From awesome-c++:
-1. standard library
-2. async event, semaphore, volatile var
-3. data struc: bitset, Btree, kdtree....
-4. image processing. I think only c++ has this type of app? 
-5. serializtion, de-. json? 
-6. malloc, alloca 
-7. math, physics, hpc kernels
-8. primitive algorithms, map,reduce,scan,sort,
-9. web
-10. VM? container? (I feel it's too complicated)
-https://github.com/fffaraz/awesome-cpp#reflection
+
+## How to reproduce results
+A top-level script  runs all tests.
+```bash
+source run_bench_top.sh
+```
+The test programs for three languages are located under the folder with the language name. Under all test folders, there is a script ```run_bench.sh```,  so tests can be run individually, as well. For example,
+```bash
+# run individual test, e.g. matrix multiplication of C++
+cd cpp/matmul && source run_bench.sh
+```
+
+## Acknowledgements
+We refer to several code resources during this project, including the links below.
+* Go by example. https://gobyexample.com 
+* Your basic graph: Golang library of basic graph algorithms. https://github.com/yourbasic/graph
+* Hyper: a fast and correct HTTP implementation for Rust. https://github.com/hyperium/hyper
+* The Roaring Bitmap project. http://roaringbitmap.org 

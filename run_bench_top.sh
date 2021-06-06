@@ -3,31 +3,40 @@
 # Go tests
 cd go/
 
-./run_bench.sh sorting
-./run_bench.sh compress
-./run_bench.sh net
-./run_bench.sh matrixmul
-./run_bench.sh DijkstraShortestPath
-./run_bench.sh roaring
-cd roaring && ./run_bench.sh real && ..
+source run_bench.sh sorting
+source run_bench.sh matrixmul
+source run_bench.sh DijkstraShortestPath
+
+# ./run_bench.sh roaring
+cd roaring && source run_bench.sh real && ..
 
 cd ..
 # End of Go tests
 
 # Cpp tests
 cd cpp/
-./run_bench.sh compression-algorithms
-./run_bench.sh DijkstraShortestPath
-./run_bench.sh ehttp
-./run_bench.sh matmul
+source run_bench.sh DijkstraShortestPath
+source run_bench.sh matmul
+source run_bench.sh cpp_sort
+source run_bench.sh CRoaring # bitmap
+source run_bench.sh ehttp
 cd ..
 #end of Cpp tests
 
 # Rs tests
 cd rust/
-./run_bench.sh compression 
-./run_bench.sh graph
-./run_bench.sh matrixmul  
-./run_bench.sh sorting 
+source run_bench.sh graph
+source run_bench.sh matrixmul  
+source run_bench.sh sorting 
+cd ..
+
 
 #http server should be tested manually with two consoles.
+cd go/ 
+source run_bench.sh net
+
+cd ../cpp/
+
+cd ../rust/
+source run_bench.sh simple-web-server
+cd ..
