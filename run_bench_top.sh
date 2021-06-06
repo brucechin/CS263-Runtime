@@ -19,7 +19,6 @@ source run_bench.sh DijkstraShortestPath
 source run_bench.sh matmul
 source run_bench.sh cpp_sort
 source run_bench.sh CRoaring # bitmap
-source run_bench.sh ehttp
 cd ..
 #end of Cpp tests
 
@@ -36,6 +35,7 @@ cd go/
 source run_bench.sh net
 
 cd ../cpp/
+source run_bench.sh ehttp
 
 cd ../rust/
 source run_bench.sh simple-web-server

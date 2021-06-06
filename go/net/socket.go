@@ -25,6 +25,9 @@ func main() {
 		port = os.Args[1]
 	}
 
+	fmt.Printf("http server program running. Run the following command in a NEW terminal \n wrk --latency -t4 -c200 -d8s http://127.0.0.1:%s\n", port)
+	fmt.Print("Manually stop this program after you get report from wrk.")
+
 	http.HandleFunc("/", handler)
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
