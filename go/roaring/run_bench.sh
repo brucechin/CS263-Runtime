@@ -2,8 +2,7 @@
 
 echo "[Go][Benchmark] bitmap"
 
-
-go test -bench Benchmark -run -
+# go test -bench Benchmark -run -
 echo
 
 real=${1:-"noreal"}

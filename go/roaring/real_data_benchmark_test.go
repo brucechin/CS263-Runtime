@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"log"
 )
 
 // To run these benchmarks, type BENCH_REAL_DATA=1 go test -bench BenchmarkRealData -run -
@@ -33,13 +34,19 @@ func init() {
 }
 
 func retrieveRealDataBitmaps(datasetName string, optimize bool) ([]*Bitmap, error) {
-	gopath, ok := os.LookupEnv("GOPATH")
-	if !ok {
-		return nil, fmt.Errorf("GOPATH not set. It's required to locate real-roaring-datasets. Set GOPATH or disable BENCH_REAL_DATA")
+	// gopath, ok := os.LookupEnv("GOPATH")
+//	_, ok := os.LookupEnv("GOPATH")
+//	if !ok {
+//		return nil, fmt.Errorf("GOPATH not set. It's required to locate real-roaring-datasets. Set GOPATH or disable BENCH_REAL_DATA")
+//	}
+
+	// basePath := path.Join(gopath, "src", "github.com", "RoaringBitmap", "real-roaring-datasets")
+	currentDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
 	}
-
-	basePath := path.Join(gopath, "src", "github.com", "RoaringBitmap", "real-roaring-datasets")
-
+	basePath := path.Join(currentDir, "/real-roaring-datasets")
+//	basePath := path.Join("/home/guyue/", "real-roaring-datasets")
 	if _, err := os.Stat(basePath); os.IsNotExist(err) {
 		return nil, fmt.Errorf("real-roaring-datasets does not exist. Run `go get github.com/RoaringBitmap/real-roaring-datasets`")
 	}
@@ -139,50 +146,56 @@ func benchmarkRealDataAggregate(b *testing.B, aggregator func(b []*Bitmap) uint6
 	}
 }
 
-func BenchmarkRealDataNext(b *testing.B) {
-	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
-		tot := uint64(0)
-		for _, b := range bitmaps {
-			it := b.Iterator()
-			for it.HasNext() {
-				tot += uint64(it.Next())
-			}
-		}
-		return tot
-	})
-}
+// func BenchmarkRealDataNext(b *testing.B) {
+// 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
+// 		tot := uint64(0)
+// 		for _, b := range bitmaps {
+// 			it := b.Iterator()
+// 			for it.HasNext() {
+// 				tot += uint64(it.Next())
+// 			}
+// 		}
+// 		return tot
+// 	})
+// }
 
-func BenchmarkRealDataNextMany(b *testing.B) {
-	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
-		tot := uint64(0)
-		buf := make([]uint32, 4096)
-		for _, b := range bitmaps {
-			it := b.ManyIterator()
-			for n := it.NextMany(buf); n != 0; n = it.NextMany(buf) {
-				for _, v := range buf[:n] {
-					tot += uint64(v)
-				}
-			}
-		}
-		return tot
-	})
-}
+// func BenchmarkRealDataNextMany(b *testing.B) {
+// 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
+// 		tot := uint64(0)
+// 		buf := make([]uint32, 4096)
+// 		for _, b := range bitmaps {
+// 			it := b.ManyIterator()
+// 			for n := it.NextMany(buf); n != 0; n = it.NextMany(buf) {
+// 				for _, v := range buf[:n] {
+// 					tot += uint64(v)
+// 				}
+// 			}
+// 		}
+// 		return tot
+// 	})
+// }
 
-func BenchmarkRealDataParOr(b *testing.B) {
-	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
-		return ParOr(0, bitmaps...).GetCardinality()
-		//return ParHeapOr(0, bitmaps...).GetCardinality()
-	})
-}
+// func BenchmarkRealDataParOr(b *testing.B) {
+// 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
+// 		return ParOr(1, bitmaps...).GetCardinality()
+// 		//return ParHeapOr(0, bitmaps...).GetCardinality()
+// 	})
+// }
 
-func BenchmarkRealDataParHeapOr(b *testing.B) {
-	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
-		return ParHeapOr(0, bitmaps...).GetCardinality()
-	})
-}
+// func BenchmarkRealDataParHeapOr(b *testing.B) {
+// 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
+// 		return ParHeapOr(1, bitmaps...).GetCardinality()
+// 	})
+// }
 
-func BenchmarkRealDataFastOr(b *testing.B) {
+// func BenchmarkRealDataFastOr(b *testing.B) {
+// 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
+// 		return FastOr(bitmaps...).GetCardinality()
+// 	})
+// }
+
+func BenchmarkRealDataParAnd(b *testing.B) {
 	benchmarkRealDataAggregate(b, func(bitmaps []*Bitmap) uint64 {
-		return FastOr(bitmaps...).GetCardinality()
+		return ParAnd(1, bitmaps...).GetCardinality()
 	})
 }
