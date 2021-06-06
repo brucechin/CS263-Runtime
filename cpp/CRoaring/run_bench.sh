@@ -5,6 +5,7 @@ echo "[Cpp][Benchmark] ${test_name}"
 
 echo "Compiling..."
 
+./amalgamation.sh
 mkdir -p build 
 cd build
 cmake ..
